@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Reveal from "./Reveal";
 import img1 from "../assets/optimized/hero.jpeg";
 import img2 from "../assets/optimized/IMG_3846.jpeg";
 import img3 from "../assets/optimized/IMG_3848.jpeg";
@@ -51,10 +52,10 @@ export default function Gallery() {
       <div className="container">
         <div className="gallery__grid">
           {images.map((img, index) => (
-            <div
-              key={index}
-              className="gallery__item"
-              onClick={() => setSelectedIndex(index)}
+            <Reveal key={index}>
+              <div
+                className="gallery__item"
+                onClick={() => setSelectedIndex(index)}
               onKeyDown={(e) => e.key === "Enter" && setSelectedIndex(index)}
               role="button"
               tabIndex={0}
@@ -67,6 +68,7 @@ export default function Gallery() {
                 className="gallery__img"
               />
             </div>
+            </Reveal>
           ))}
         </div>
       </div>

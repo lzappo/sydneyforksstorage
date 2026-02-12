@@ -34,8 +34,19 @@ export default function MobileNav() {
         aria-controls="mobile-nav-menu"
         aria-label={isOpen ? "Close menu" : "Open menu"}
       >
-        <span className="mobile-nav__hamburger" aria-hidden="true">
-          {isOpen ? "✕" : "☰"}
+        <span className="mobile-nav__icon" aria-hidden="true">
+          {isOpen ? (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="6" y1="6" x2="18" y2="18" />
+              <line x1="18" y1="6" x2="6" y2="18" />
+            </svg>
+          ) : (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="4" y1="6" x2="20" y2="6" />
+              <line x1="4" y1="12" x2="20" y2="12" />
+              <line x1="4" y1="18" x2="20" y2="18" />
+            </svg>
+          )}
         </span>
       </button>
       <div
@@ -55,7 +66,10 @@ export default function MobileNav() {
             onClick={closeNav}
             aria-label="Close menu"
           >
-            ✕
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="6" y1="6" x2="18" y2="18" />
+              <line x1="18" y1="6" x2="6" y2="18" />
+            </svg>
           </button>
           {navLinks.map((link) => (
             <a

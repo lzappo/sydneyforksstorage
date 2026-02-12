@@ -2,6 +2,7 @@ import { HelmetProvider, Helmet } from "react-helmet-async";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Gallery from "./components/Gallery";
+import Reveal from "./components/Reveal";
 import Features from "./components/Features";
 import Units from "./components/Units";
 import WhyChooseUs from "./components/WhyChooseUs";
@@ -74,13 +75,27 @@ export default function App() {
       <Header />
       <main>
         <Hero />
-        <Gallery />
-        <Features />
-        <Units />
-        <WhyChooseUs />
-        <Reviews />
-        <Location />
-        <Contact />
+        <Reveal>
+          <Gallery />
+        </Reveal>
+        <Reveal>
+          <Features />
+        </Reveal>
+        <Reveal>
+          <Units />
+        </Reveal>
+        <Reveal>
+          <WhyChooseUs />
+        </Reveal>
+        <Reveal>
+          <Reviews />
+        </Reveal>
+        <Reveal>
+          <Location />
+        </Reveal>
+        <Reveal>
+          <Contact />
+        </Reveal>
       </main>
       <Footer />
       <MobileCTA />
