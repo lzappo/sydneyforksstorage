@@ -230,8 +230,18 @@ button {
   border-radius: var(--radius);
   color: var(--color-text);
   font-size: 1.25rem;
+  line-height: 1;
   cursor: pointer;
   transition: border-color 0.2s, background-color 0.2s;
+}
+
+.mobile-nav__hamburger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
 }
 
 .mobile-nav__toggle:hover {
