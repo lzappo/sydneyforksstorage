@@ -2,7 +2,7 @@ import heroImage from "../assets/optimized/IMG_3841.jpeg";
 
 export default function Hero() {
   return (
-    <section className="hero">
+    <section id="hero" className="hero">
       <div className="hero__bg">
         <img
           src={heroImage}

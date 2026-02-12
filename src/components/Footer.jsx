@@ -2,7 +2,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="footer">
+    <footer id="footer" className="footer">
       <div className="container footer__inner">
         <div className="footer__brand">
           <span className="footer__name">Sydney Forks Self Storage</span>

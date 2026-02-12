@@ -781,8 +781,13 @@ button {
 
 @media (max-width: 768px) {
   .mobile-cta {
-    display: flex;
+    display: none;
     justify-content: center;
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+  }
+
+  .mobile-cta.mobile-cta--visible {
+    display: flex;
   }
 }
 
