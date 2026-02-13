@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Reveal from "./Reveal";
 import img1 from "../assets/optimized/hero.jpeg";
 import img2 from "../assets/optimized/IMG_3846.jpeg";
@@ -73,30 +74,32 @@ export default function Gallery() {
         </div>
       </div>
 
-      {selectedIndex !== null && (
-        <div
-          className="gallery__lightbox"
-          onClick={handleBackdropClick}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Enlarged facility photo"
-        >
-          <button
-            type="button"
-            className="gallery__close"
-            onClick={closeLightbox}
-            aria-label="Close"
+      {selectedIndex !== null &&
+        createPortal(
+          <div
+            className="gallery__lightbox"
+            onClick={handleBackdropClick}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Enlarged facility photo"
           >
-            ×
-          </button>
-          <img
-            src={images[selectedIndex].src}
-            alt={images[selectedIndex].alt}
-            className="gallery__lightbox-img"
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-      )}
+            <button
+              type="button"
+              className="gallery__close"
+              onClick={closeLightbox}
+              aria-label="Close"
+            >
+              ×
+            </button>
+            <img
+              src={images[selectedIndex].src}
+              alt={images[selectedIndex].alt}
+              className="gallery__lightbox-img"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>,
+          document.body
+        )}
     </section>
   );
 }
