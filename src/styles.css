@@ -595,9 +595,10 @@ button {
 }
 
 .feature-card__icon {
-  display: block;
-  font-size: 2rem;
+  display: flex;
+  justify-content: center;
   margin-bottom: 0.5rem;
+  color: var(--color-accent);
 }
 
 .feature-card__title {
