@@ -40,6 +40,7 @@ const localBusinessSchema = {
     addressCountry: "CA",
   },
   openingHours: "Mo-Su 00:00-23:59",
+  sameAs: ["https://www.facebook.com/people/Sydney-Forks-Self-Storage/61575293816009/"],
 };
 
 export default function App() {

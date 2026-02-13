@@ -840,6 +840,10 @@ button {
 }
 
 .contact__phone-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
   padding: 1.5rem;
   background-color: var(--color-card-bg);
   border-radius: var(--radius);
@@ -855,18 +859,44 @@ button {
 .contact__phone-link {
   font-size: 1.5rem;
   font-weight: 700;
-  display: block;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.contact__phone-link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
 .contact__email {
-  display: block;
-  margin-top: 0.5rem;
+  display: inline-block;
   font-size: 0.95rem;
   color: var(--color-text-muted);
+  border-radius: 4px;
 }
 
 .contact__email:hover {
   color: var(--color-accent);
+}
+
+.contact__email:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.contact__facebook {
+  display: inline-flex;
+  color: var(--color-text-muted);
+  border-radius: 4px;
+}
+
+.contact__facebook:hover {
+  color: var(--color-accent);
+}
+
+.contact__facebook:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
 .contact__form {
@@ -951,6 +981,22 @@ button {
 
 .footer__email:hover {
   color: white;
+}
+
+.footer__facebook {
+  display: inline-flex;
+  align-self: flex-start;
+  color: var(--color-text-muted);
+  border-radius: 4px;
+}
+
+.footer__facebook:hover {
+  color: white;
+}
+
+.footer__facebook:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
 .footer__nav {
