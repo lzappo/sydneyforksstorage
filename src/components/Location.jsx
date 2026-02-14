@@ -1,4 +1,3 @@
-const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "";
 const placeId = import.meta.env.VITE_GOOGLE_PLACE_ID || "";
 
 export default function Location() {
@@ -8,10 +7,8 @@ export default function Location() {
     ? `https://www.google.com/maps/place/?q=place_id:${placeId}`
     : `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
 
-  const mapEmbedUrl =
-    apiKey && placeId
-      ? `https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=place_id:${placeId}`
-      : `https://www.google.com/maps?q=${mapsQuery}&output=embed`;
+  // Basic embed - no API key required (avoids "API not activated" errors)
+  const mapEmbedUrl = `https://www.google.com/maps?q=${mapsQuery}&output=embed`;
 
   return (
     <section id="location" className="location">
