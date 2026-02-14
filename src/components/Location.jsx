@@ -1,10 +1,17 @@
+const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "";
+const placeId = import.meta.env.VITE_GOOGLE_PLACE_ID || "";
+
 export default function Location() {
   const address = "2627 King's Rd, Sydney Forks, NS B1L1A1";
   const mapsQuery = encodeURIComponent("2627 King's Rd, Sydney Forks, NS B1L1A1");
-  const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+  const directionsUrl = placeId
+    ? `https://www.google.com/maps/place/?q=place_id:${placeId}`
+    : `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
 
-  // Get exact embed from: Google Maps → search address → Share → Embed a map
-  const mapEmbedUrl = `https://www.google.com/maps?q=${mapsQuery}&output=embed`;
+  const mapEmbedUrl =
+    apiKey && placeId
+      ? `https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=place_id:${placeId}`
+      : `https://www.google.com/maps?q=${mapsQuery}&output=embed`;
 
   return (
     <section id="location" className="location">

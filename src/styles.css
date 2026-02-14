@@ -730,6 +730,19 @@ button {
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
 }
 
+.reviews__loading {
+  margin: 0 0 1.5rem;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+.review-card__rating {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: var(--color-accent);
+  letter-spacing: 0.05em;
+}
+
 .review-card__text {
   margin: 0 0 1rem;
   font-style: italic;

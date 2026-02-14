@@ -24,11 +24,12 @@ npm run preview
 - **Location component** (`src/components/Location.jsx`): Update the `address` variable and uncomment/add the full street address in the NAP block and JSON-LD schema.
 - **App.jsx**: Uncomment the `address` object in `localBusinessSchema` and add your full street address.
 
-### Google Maps embed
-- **Location component** (`src/components/Location.jsx`): Replace `mapEmbedUrl` with your actual Google Maps embed URL (from Google Maps → Share → Embed a map).
+### Google Maps & Place ID
+Copy `.env.example` to `.env` and add:
+- `VITE_GOOGLE_MAPS_API_KEY` – From [Google Cloud Console](https://console.cloud.google.com/). Enable **Maps Embed API** (map iframe) and **Places API** (for live Google reviews).
+- `VITE_GOOGLE_PLACE_ID` – Your business Place ID (used for the map embed, reviews, and "Read more on Google" link).
 
-### Google Business Profile
-- **Reviews component** (`src/components/Reviews.jsx`): Replace `googleReviewsUrl` with your Google Business Profile / Google Maps listing URL.
+**Google reviews** are fetched via `/api/reviews` (server-side to avoid CORS). Locally, the Vite dev server proxies this to the Places API. For production, deploy to **Vercel** so the `api/reviews.js` serverless function runs. Add `GOOGLE_MAPS_API_KEY` and `GOOGLE_PLACE_ID` to your Vercel project env vars (or reuse the `VITE_` ones).
 
 ### Site URL
 - Add `VITE_SITE_URL=https://yourdomain.com` to `.env` for canonical and Open Graph URLs.
