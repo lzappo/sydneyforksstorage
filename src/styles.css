@@ -579,11 +579,15 @@ button {
 
 .features-strip__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
+  align-items: stretch;
 }
 
 .feature-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 14rem;
   text-align: center;
   padding: 1.25rem;
   background-color: var(--color-card-bg);
@@ -612,6 +616,7 @@ button {
 
 .feature-card__desc {
   margin: 0;
+  flex: 1;
   font-size: 0.9rem;
   color: var(--color-text-muted);
 }
