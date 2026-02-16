@@ -25,6 +25,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 6.5rem;
 }
 
 body {
@@ -597,8 +598,10 @@ button {
 }
 
 .feature-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
 .feature-card__icon {
@@ -609,7 +612,7 @@ button {
 }
 
 .feature-card__title {
-  margin: 0 0 0.25rem;
+  margin: 0 0 0.75rem;
   font-size: 1.1rem;
   font-weight: 700;
 }
@@ -655,8 +658,11 @@ button {
 }
 
 .unit-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  border-top: 2px solid var(--color-accent);
+  border-right: 2px solid var(--color-accent);
+  border-bottom: 2px solid var(--color-accent);
 }
 
 .unit-card__title {
@@ -731,8 +737,11 @@ button {
 }
 
 .review-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  border-right: 2px solid var(--color-accent);
+  border-bottom: 2px solid var(--color-accent);
+  border-left: 2px solid var(--color-accent);
 }
 
 .reviews__loading {
