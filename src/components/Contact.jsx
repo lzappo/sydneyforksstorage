@@ -14,11 +14,11 @@ export default function Contact() {
     if (!endpoint) {
       // mailto fallback when Formspree not configured
       const name = form.name?.value || "";
-      const email = form.email?.value || "";
+      const contact = form.contact?.value || "";
       const message = form.message?.value || "";
       const subject = encodeURIComponent(`Quote Request from ${name}`);
       const body = encodeURIComponent(
-        `Name: ${name}\nEmail/Phone: ${email}\n\nMessage:\n${message}`
+        `Name: ${name}\nEmail/Phone: ${contact}\n\nMessage:\n${message}`
       );
       window.location.href = `mailto:sfstorage@outlook.com?subject=${subject}&body=${body}`;
       setStatus("success");
@@ -94,14 +94,12 @@ export default function Contact() {
               placeholder="Your name"
               disabled={status === "loading"}
             />
-            <label htmlFor="contact-email" className="form-label">Email or Phone</label>
+            <label htmlFor="contact-contact" className="form-label">Email or Phone</label>
             <input
-              id="contact-email"
-              name="email"
+              id="contact-contact"
+              name="contact"
               type="text"
               required
-              inputMode="email"
-              autoComplete="email"
               className="form-input"
               placeholder="your@email.com or 902-XXX-XXXX"
               disabled={status === "loading"}
