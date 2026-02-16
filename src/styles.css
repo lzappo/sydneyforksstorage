@@ -977,6 +977,12 @@ button {
   color: #4ade80;
 }
 
+.form-error {
+  margin: 0;
+  color: var(--color-accent);
+  font-size: 0.95rem;
+}
+
 @media (max-width: 768px) {
   .contact__content {
     grid-template-columns: 1fr;

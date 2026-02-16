@@ -1,29 +1,18 @@
 import { useState } from "react";
 import logo from "../assets/optimized/logo.jpeg";
 
-// Formspree: Set VITE_FORMSPREE_ENDPOINT in .env to your Formspree form ID
-// Example: VITE_FORMSPREE_ENDPOINT=https://formspree.io/f/YOUR_FORM_ID
-const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT || "";
+const endpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT || "";
 
 export default function Contact() {
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState("idle"); // idle | loading | success | error
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formspreeEndpoint) {
-      const form = e.target;
-      fetch(formspreeEndpoint, {
-        method: "POST",
-        body: new FormData(form),
-        headers: { Accept: "application/json" },
-      })
-        .then((res) => {
-          if (res.ok) setSubmitted(true);
-        })
-        .catch(() => {});
-    } else {
+    const form = e.target;
+
+    if (!endpoint) {
       // mailto fallback when Formspree not configured
-      const form = e.target;
       const name = form.name?.value || "";
       const email = form.email?.value || "";
       const message = form.message?.value || "";
@@ -32,7 +21,31 @@ export default function Contact() {
         `Name: ${name}\nEmail/Phone: ${email}\n\nMessage:\n${message}`
       );
       window.location.href = `mailto:sfstorage@outlook.com?subject=${subject}&body=${body}`;
-      setSubmitted(true);
+      setStatus("success");
+      return;
+    }
+
+    setStatus("loading");
+    setErrorMessage("");
+
+    try {
+      const res = await fetch(endpoint, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+
+      if (res.ok) {
+        setStatus("success");
+        form.reset();
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setStatus("error");
+        setErrorMessage(data.error || data.errors?.[0]?.message || "Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      setStatus("error");
+      setErrorMessage("Unable to send. Please check your connection and try again.");
     }
   };
 
@@ -67,7 +80,7 @@ export default function Contact() {
           <form
             className="contact__form"
             onSubmit={handleSubmit}
-            action={formspreeEndpoint || "#"}
+            action={endpoint || "#"}
             method="POST"
           >
             <label htmlFor="contact-name" className="form-label">Name</label>
@@ -79,6 +92,7 @@ export default function Contact() {
               autoComplete="name"
               className="form-input"
               placeholder="Your name"
+              disabled={status === "loading"}
             />
             <label htmlFor="contact-email" className="form-label">Email or Phone</label>
             <input
@@ -90,6 +104,7 @@ export default function Contact() {
               autoComplete="email"
               className="form-input"
               placeholder="your@email.com or 902-XXX-XXXX"
+              disabled={status === "loading"}
             />
             <label htmlFor="contact-message" className="form-label">Message</label>
             <textarea
@@ -99,12 +114,20 @@ export default function Contact() {
               required
               className="form-input form-textarea"
               placeholder="Tell us about your storage needs (size, duration, etc.)"
+              disabled={status === "loading"}
             />
-            {submitted && (
-              <p className="form-success">Thank you! We&apos;ll be in touch soon.</p>
+            {status === "success" && (
+              <p className="form-success">Your request has been sent successfully.</p>
             )}
-            <button type="submit" className="button button--primary button--large">
-              Request a Quote
+            {status === "error" && (
+              <p className="form-error">{errorMessage}</p>
+            )}
+            <button
+              type="submit"
+              className="button button--primary button--large"
+              disabled={status === "loading"}
+            >
+              {status === "loading" ? "Sending…" : "Request a Quote"}
             </button>
           </form>
         </div>
