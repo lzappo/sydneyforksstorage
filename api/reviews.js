@@ -29,8 +29,10 @@ export default async function handler(req, res) {
 
     const reviews = (data.result?.reviews || []).map((r) => ({
       text: r.text || "",
-      author: r.author_name ? `— ${r.author_name}` : "— Google user",
+      author_name: r.author_name || "Google user",
       rating: r.rating ?? null,
+      profile_photo_url: r.profile_photo_url || null,
+      relative_time_description: r.relative_time_description || null,
     }));
 
     return res.status(200).json({ reviews });
