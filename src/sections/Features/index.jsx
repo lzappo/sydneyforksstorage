@@ -46,46 +46,14 @@ const icons = {
 
 export default function Features() {
   const features = [
-    {
-      title: "24/7 security cameras",
-      description: "Keep your belongings safe and protected with around-the-clock monitoring.",
-      icon: icons.camera,
-    },
-    {
-      title: "Always open",
-      description: "Access your unit whenever you need it.",
-      icon: icons.lockOpen,
-    },
-    {
-      title: "Clean & well maintained",
-      description: "Professional, well-kept storage spaces.",
-      icon: icons.checkCircle,
-    },
-    {
-      title: "Heated units",
-      description: "Available upon request for temperature-sensitive items. Additional charges apply.",
-      icon: icons.thermometer,
-    },
-    {
-      title: "Month to month rentals",
-      description: "No contract needed. Stay as long or as short as you need.",
-      icon: icons.calendar,
-    },
-    {
-      title: "Convenient Sydney Forks Location",
-      description: "Located at 2627 Kings Rd with easy access from Sydney, North Sydney, and surrounding areas.",
-      icon: icons.mapPin,
-    },
-    {
-      title: "Multiple Unit Sizes",
-      description: "Storage units available for household, business, and seasonal storage needs.",
-      icon: icons.squares2x2,
-    },
-    {
-      title: "Locally Owned & Trusted",
-      description: "Proudly serving the Sydney Forks community with reliable and secure storage solutions.",
-      icon: icons.shieldCheck,
-    },
+    { title: "24/7 security cameras", description: "Keep your belongings safe and protected with around-the-clock monitoring.", icon: icons.camera },
+    { title: "Always open", description: "Access your unit whenever you need it.", icon: icons.lockOpen },
+    { title: "Clean & well maintained", description: "Professional, well-kept storage spaces.", icon: icons.checkCircle },
+    { title: "Heated units", description: "Available upon request for temperature-sensitive items. Additional charges apply.", icon: icons.thermometer },
+    { title: "Month to month rentals", description: "No contract needed. Stay as long or as short as you need.", icon: icons.calendar },
+    { title: "Convenient Sydney Forks Location", description: "Located at 2627 Kings Rd with easy access from Sydney, North Sydney, and surrounding areas.", icon: icons.mapPin },
+    { title: "Multiple Unit Sizes", description: "Storage units available for household, business, and seasonal storage needs.", icon: icons.squares2x2 },
+    { title: "Locally Owned & Trusted", description: "Proudly serving the Sydney Forks community with reliable and secure storage solutions.", icon: icons.shieldCheck },
   ];
 
   return (

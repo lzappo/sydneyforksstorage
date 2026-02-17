@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useToggle } from "../hooks/useToggle";
+import { useBodyScrollLock } from "../hooks/useBodyScrollLock";
 
 export const navLinks = [
   { href: "#units", label: "Units" },
@@ -9,27 +10,16 @@ export const navLinks = [
 ];
 
 export default function MobileNav() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, toggle, setOpen] = useToggle(false);
 
-  const closeNav = () => setIsOpen(false);
-
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isOpen]);
+  useBodyScrollLock(isOpen);
 
   return (
     <>
       <button
         type="button"
         className="mobile-nav__toggle"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={toggle}
         aria-expanded={isOpen}
         aria-controls="mobile-nav-menu"
         aria-label={isOpen ? "Close menu" : "Open menu"}
@@ -56,14 +46,14 @@ export default function MobileNav() {
       >
         <div
           className="mobile-nav__backdrop"
-          onClick={closeNav}
+          onClick={() => setOpen(false)}
           aria-hidden="true"
         />
         <nav className="mobile-nav__menu" aria-label="Mobile navigation">
           <button
             type="button"
             className="mobile-nav__close"
-            onClick={closeNav}
+            onClick={() => setOpen(false)}
             aria-label="Close menu"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -76,7 +66,7 @@ export default function MobileNav() {
               key={link.href}
               href={link.href}
               className="mobile-nav__link"
-              onClick={closeNav}
+              onClick={() => setOpen(false)}
             >
               {link.label}
             </a>

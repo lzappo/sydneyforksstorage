@@ -6,8 +6,6 @@ export default function Location() {
   const directionsUrl = placeId
     ? `https://www.google.com/maps/place/?q=place_id:${placeId}`
     : `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
-
-  // Basic embed - no API key required (avoids "API not activated" errors)
   const mapEmbedUrl = `https://www.google.com/maps?q=${mapsQuery}&output=embed`;
 
   return (

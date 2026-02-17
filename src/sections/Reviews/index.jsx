@@ -1,36 +1,39 @@
 import { useState, useEffect, useRef } from "react";
-import logo from "../assets/optimized/logo.jpeg";
+import logo from "../../assets/optimized/logo.jpeg";
+import { useFetch } from "../../hooks/useFetch";
 
 const placeId = import.meta.env.VITE_GOOGLE_PLACE_ID || "";
 
-// TODO: Replace with production write-review URL if different. Uses place_id to open Google's write review flow.
 const REVIEW_URL = placeId
   ? `https://search.google.com/local/writereview?placeid=${placeId}`
   : "https://www.google.com/maps/search/?api=1&query=Sydney+Forks+Self+Storage+2627+King%27s+Rd+Sydney+Forks+NS";
 
 const FALLBACK_REVIEWS = [
-  {
-    text: "Great storage facility. Clean and easy to access. Staff was helpful when I needed to find the right size unit.",
-    author_name: "Local customer",
-    rating: 5,
-    profile_photo_url: null,
-    relative_time_description: null,
-  },
-  {
-    text: "Convenient location and fair pricing. I've been storing here for a few months and have had no issues.",
-    author_name: "Satisfied customer",
-    rating: 5,
-    profile_photo_url: null,
-    relative_time_description: null,
-  },
-  {
-    text: "Quick to get set up and the unit was ready when I needed it. Would recommend to anyone in the area.",
-    author_name: "Customer",
-    rating: 5,
-    profile_photo_url: null,
-    relative_time_description: null,
-  },
+  { text: "Great storage facility. Clean and easy to access. Staff was helpful when I needed to find the right size unit.", author_name: "Local customer", rating: 5, profile_photo_url: null, relative_time_description: null },
+  { text: "Convenient location and fair pricing. I've been storing here for a few months and have had no issues.", author_name: "Satisfied customer", rating: 5, profile_photo_url: null, relative_time_description: null },
+  { text: "Quick to get set up and the unit was ready when I needed it. Would recommend to anyone in the area.", author_name: "Customer", rating: 5, profile_photo_url: null, relative_time_description: null },
 ];
+
+async function fetchGoogleReviews() {
+  try {
+    const res = await fetch("/api/reviews");
+    if (!res.ok) return null;
+    const { reviews } = await res.json();
+    if (Array.isArray(reviews) && reviews.length > 0) {
+      return reviews.map((r) => ({
+        text: r.text || "",
+        author_name: r.author_name ?? "Google user",
+        rating: r.rating ?? null,
+        profile_photo_url: r.profile_photo_url || null,
+        relative_time_description: r.relative_time_description || null,
+      }));
+    }
+    return null;
+  } catch (err) {
+    console.warn("Could not fetch Google reviews:", err);
+    return null;
+  }
+}
 
 function computeAverageRating(reviews) {
   const withRating = reviews.filter((r) => r.rating != null);
@@ -60,7 +63,7 @@ function Stars({ rating, size = 16 }) {
   );
 }
 
-function ReviewCard({ review, index }) {
+function ReviewCard({ review }) {
   const [expanded, setExpanded] = useState(false);
   const text = review.text || "";
   const needsExpand = text.length > 200;
@@ -77,25 +80,15 @@ function ReviewCard({ review, index }) {
         </div>
         <div className="review-card__meta">
           <strong className="review-card__name">{review.author_name || "Customer"}</strong>
-          {review.relative_time_description && (
-            <span className="review-card__time">{review.relative_time_description}</span>
-          )}
+          {review.relative_time_description && <span className="review-card__time">{review.relative_time_description}</span>}
         </div>
       </header>
       <Stars rating={review.rating} />
-      <p
-        className={`review-card__text ${expanded ? "review-card__text--expanded" : ""}`}
-        style={!expanded && needsExpand ? { WebkitLineClamp: 4, lineClamp: 4 } : undefined}
-      >
+      <p className={`review-card__text ${expanded ? "review-card__text--expanded" : ""}`} style={!expanded && needsExpand ? { WebkitLineClamp: 4, lineClamp: 4 } : undefined}>
         &ldquo;{text}&rdquo;
       </p>
       {needsExpand && (
-        <button
-          type="button"
-          className="review-card__expand"
-          onClick={() => setExpanded(!expanded)}
-          aria-expanded={expanded}
-        >
+        <button type="button" className="review-card__expand" onClick={() => setExpanded(!expanded)} aria-expanded={expanded}>
           {expanded ? "Show less" : "Read more"}
         </button>
       )}
@@ -103,55 +96,16 @@ function ReviewCard({ review, index }) {
   );
 }
 
-async function fetchGoogleReviews() {
-  try {
-    const res = await fetch("/api/reviews");
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      console.warn("Could not fetch Google reviews:", res.status, err);
-      return null;
-    }
-    const { reviews } = await res.json();
-    if (Array.isArray(reviews) && reviews.length > 0) {
-      return reviews.map((r) => ({
-        text: r.text || "",
-        author_name: r.author_name ?? "Google user",
-        rating: r.rating ?? null,
-        profile_photo_url: r.profile_photo_url || null,
-        relative_time_description: r.relative_time_description || null,
-      }));
-    }
-    return null;
-  } catch (err) {
-    console.warn("Could not fetch Google reviews:", err);
-    return null;
-  }
-}
-
 export default function Reviews() {
-  const [reviews, setReviews] = useState(FALLBACK_REVIEWS);
-  const [loading, setLoading] = useState(!!placeId);
+  const { data: fetchedReviews, loading } = useFetch(fetchGoogleReviews, !!placeId);
+  const reviews = fetchedReviews ?? FALLBACK_REVIEWS;
   const [carouselIndex, setCarouselIndex] = useState(0);
   const scrollRef = useRef(null);
-
-  useEffect(() => {
-    if (!placeId) return;
-    let cancelled = false;
-    fetchGoogleReviews().then((data) => {
-      if (!cancelled && data && data.length > 0) {
-        setReviews(data);
-      }
-      setLoading(false);
-    });
-    return () => { cancelled = true; };
-  }, []);
 
   const avgRating = computeAverageRating(reviews);
   const totalCards = reviews.length;
   const cardsToShow = 3;
   const maxIndex = Math.max(0, totalCards - cardsToShow);
-  const canScrollLeft = carouselIndex > 0;
-  const canScrollRight = carouselIndex < maxIndex;
 
   const scrollCarousel = (direction) => {
     const delta = direction === "left" ? -1 : 1;
@@ -161,9 +115,7 @@ export default function Reviews() {
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
-    const cardWidth = 280;
-    const gap = 16;
-    el.scrollTo({ left: carouselIndex * (cardWidth + gap), behavior: "smooth" });
+    el.scrollTo({ left: carouselIndex * (280 + 16), behavior: "smooth" });
   }, [carouselIndex]);
 
   return (
@@ -172,15 +124,10 @@ export default function Reviews() {
         <h2 className="section-title">Customer Reviews</h2>
         <p className="section-subtitle">See what our customers say about their experience.</p>
 
-        {loading && (
-          <p className="reviews__loading" aria-live="polite">
-            Loading reviews…
-          </p>
-        )}
+        {loading && <p className="reviews__loading" aria-live="polite">Loading reviews…</p>}
 
         {!loading && (
           <>
-            {/* Google Reviews Summary header card */}
             <div className="reviews-summary">
               <div className="reviews-summary__logo">
                 <img src={logo} alt="" width={120} height={120} />
@@ -200,47 +147,21 @@ export default function Reviews() {
                   <span style={{ color: "#EA4335" }}>e</span>
                 </span>
               </div>
-              <a
-                href={REVIEW_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="reviews-summary__leave-btn"
-              >
-                Leave a Review
-              </a>
+              <a href={REVIEW_URL} target="_blank" rel="noopener noreferrer" className="reviews-summary__leave-btn">Leave a Review</a>
             </div>
 
-            {/* Carousel of review cards */}
             <div className="reviews-carousel">
               {maxIndex > 0 && (
-                <button
-                  type="button"
-                  className="reviews-carousel__arrow reviews-carousel__arrow--left"
-                  onClick={() => scrollCarousel("left")}
-                  disabled={!canScrollLeft}
-                  aria-label="Previous reviews"
-                >
-                  <svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                    <path d="M15 18l-6-6 6-6" />
-                  </svg>
+                <button type="button" className="reviews-carousel__arrow reviews-carousel__arrow--left" onClick={() => scrollCarousel("left")} disabled={carouselIndex <= 0} aria-label="Previous reviews">
+                  <svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
                 </button>
               )}
               <div className="reviews-carousel__track" ref={scrollRef}>
-                {reviews.map((review, index) => (
-                  <ReviewCard key={index} review={review} index={index} />
-                ))}
+                {reviews.map((review, index) => <ReviewCard key={index} review={review} />)}
               </div>
               {maxIndex > 0 && (
-                <button
-                  type="button"
-                  className="reviews-carousel__arrow reviews-carousel__arrow--right"
-                  onClick={() => scrollCarousel("right")}
-                  disabled={!canScrollRight}
-                  aria-label="Next reviews"
-                >
-                  <svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                    <path d="M9 18l6-6-6-6" />
-                  </svg>
+                <button type="button" className="reviews-carousel__arrow reviews-carousel__arrow--right" onClick={() => scrollCarousel("right")} disabled={carouselIndex >= maxIndex} aria-label="Next reviews">
+                  <svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M9 18l6-6-6-6" /></svg>
                 </button>
               )}
             </div>

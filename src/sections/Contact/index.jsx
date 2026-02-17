@@ -1,10 +1,10 @@
 import { useState } from "react";
-import logo from "../assets/optimized/logo.jpeg";
+import logo from "../../assets/optimized/logo.jpeg";
 
 const endpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT || "";
 
 export default function Contact() {
-  const [status, setStatus] = useState("idle"); // idle | loading | success | error
+  const [status, setStatus] = useState("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e) => {
@@ -12,7 +12,6 @@ export default function Contact() {
     const form = e.target;
 
     if (!endpoint) {
-      // mailto fallback when Formspree not configured
       const name = form.name?.value || "";
       const contact = form.contact?.value || "";
       const message = form.message?.value || "";
@@ -84,47 +83,14 @@ export default function Contact() {
             method="POST"
           >
             <label htmlFor="contact-name" className="form-label">Name</label>
-            <input
-              id="contact-name"
-              name="name"
-              type="text"
-              required
-              autoComplete="name"
-              className="form-input"
-              placeholder="Your name"
-              disabled={status === "loading"}
-            />
+            <input id="contact-name" name="name" type="text" required autoComplete="name" className="form-input" placeholder="Your name" disabled={status === "loading"} />
             <label htmlFor="contact-contact" className="form-label">Email or Phone</label>
-            <input
-              id="contact-contact"
-              name="contact"
-              type="text"
-              required
-              className="form-input"
-              placeholder="your@email.com or 902-XXX-XXXX"
-              disabled={status === "loading"}
-            />
+            <input id="contact-contact" name="contact" type="text" required className="form-input" placeholder="your@email.com or 902-XXX-XXXX" disabled={status === "loading"} />
             <label htmlFor="contact-message" className="form-label">Message</label>
-            <textarea
-              id="contact-message"
-              name="message"
-              rows={4}
-              required
-              className="form-input form-textarea"
-              placeholder="Tell us about your storage needs (size, duration, etc.)"
-              disabled={status === "loading"}
-            />
-            {status === "success" && (
-              <p className="form-success">Your request has been sent successfully.</p>
-            )}
-            {status === "error" && (
-              <p className="form-error">{errorMessage}</p>
-            )}
-            <button
-              type="submit"
-              className="button button--primary button--large"
-              disabled={status === "loading"}
-            >
+            <textarea id="contact-message" name="message" rows={4} required className="form-input form-textarea" placeholder="Tell us about your storage needs (size, duration, etc.)" disabled={status === "loading"} />
+            {status === "success" && <p className="form-success">Your request has been sent successfully.</p>}
+            {status === "error" && <p className="form-error">{errorMessage}</p>}
+            <button type="submit" className="button button--primary button--large" disabled={status === "loading"}>
               {status === "loading" ? "Sending…" : "Request a Quote"}
             </button>
           </form>

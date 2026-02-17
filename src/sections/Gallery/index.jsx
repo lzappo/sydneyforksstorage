@@ -1,12 +1,14 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
-import Reveal from "./Reveal";
-import img1 from "../assets/optimized/hero.jpeg";
-import img2 from "../assets/optimized/IMG_3846.jpeg";
-import img3 from "../assets/optimized/IMG_3848.jpeg";
-import img4 from "../assets/optimized/IMG_3865.jpeg";
-import img5 from "../assets/optimized/IMG_3866.jpeg";
-import img6 from "../assets/optimized/IMG_8273.jpeg";
+import Reveal from "../../components/Reveal";
+import { useSwipe } from "../../hooks/useSwipe";
+import { useBodyScrollLock } from "../../hooks/useBodyScrollLock";
+import img1 from "../../assets/optimized/hero.jpeg";
+import img2 from "../../assets/optimized/IMG_3846.jpeg";
+import img3 from "../../assets/optimized/IMG_3848.jpeg";
+import img4 from "../../assets/optimized/IMG_3865.jpeg";
+import img5 from "../../assets/optimized/IMG_3866.jpeg";
+import img6 from "../../assets/optimized/IMG_8273.jpeg";
 
 const images = [
   { src: img1, alt: "Sydney Forks Self Storage facility exterior" },
@@ -17,11 +19,8 @@ const images = [
   { src: img5, alt: "Sydney Forks Self Storage storage units" },
 ];
 
-const MIN_SWIPE_DISTANCE = 50;
-
 export default function Gallery() {
   const [selectedIndex, setSelectedIndex] = useState(null);
-  const touchStartX = useRef(null);
 
   const closeLightbox = () => setSelectedIndex(null);
 
@@ -34,6 +33,14 @@ export default function Gallery() {
     e.stopPropagation();
     setSelectedIndex((i) => (i === images.length - 1 ? 0 : i + 1));
   };
+
+  const swipe = useSwipe({
+    onSwipeLeft: () => setSelectedIndex((i) => (i === images.length - 1 ? 0 : i + 1)),
+    onSwipeRight: () => setSelectedIndex((i) => (i === 0 ? images.length - 1 : i - 1)),
+    minDistance: 50,
+  });
+
+  useBodyScrollLock(selectedIndex !== null);
 
   useEffect(() => {
     const handleKey = (e) => {
@@ -52,34 +59,8 @@ export default function Gallery() {
     return () => window.removeEventListener("keydown", handleKey);
   }, [selectedIndex]);
 
-  useEffect(() => {
-    if (selectedIndex !== null) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [selectedIndex]);
-
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) closeLightbox();
-  };
-
-  const handleTouchStart = (e) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = (e) => {
-    if (touchStartX.current === null) return;
-    const deltaX = touchStartX.current - e.changedTouches[0].clientX;
-    touchStartX.current = null;
-    if (deltaX > MIN_SWIPE_DISTANCE) {
-      setSelectedIndex((i) => (i === images.length - 1 ? 0 : i + 1));
-    } else if (deltaX < -MIN_SWIPE_DISTANCE) {
-      setSelectedIndex((i) => (i === 0 ? images.length - 1 : i - 1));
-    }
   };
 
   return (
@@ -94,18 +75,18 @@ export default function Gallery() {
               <div
                 className="gallery__item"
                 onClick={() => setSelectedIndex(index)}
-              onKeyDown={(e) => e.key === "Enter" && setSelectedIndex(index)}
-              role="button"
-              tabIndex={0}
-              aria-label={`View ${img.alt}`}
-            >
-              <img
-                src={img.src}
-                alt={img.alt}
-                loading="lazy"
-                className="gallery__img"
-              />
-            </div>
+                onKeyDown={(e) => e.key === "Enter" && setSelectedIndex(index)}
+                role="button"
+                tabIndex={0}
+                aria-label={`View ${img.alt}`}
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  loading="lazy"
+                  className="gallery__img"
+                />
+              </div>
             </Reveal>
           ))}
         </div>
@@ -116,8 +97,8 @@ export default function Gallery() {
           <div
             className="gallery__lightbox"
             onClick={handleBackdropClick}
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
+            onTouchStart={swipe.onTouchStart}
+            onTouchEnd={swipe.onTouchEnd}
             role="dialog"
             aria-modal="true"
             aria-label="Enlarged facility photo"
