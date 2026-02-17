@@ -42,17 +42,23 @@ const icons = {
       <path d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.25-8.25-3.286Z" />
     </svg>
   ),
+  arrowsUpDown: (
+    <svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="m7 15 5 5 5-5M7 9l5-5 5 5" />
+    </svg>
+  ),
 };
 
 export default function Features() {
   const features = [
     { title: "24/7 security cameras", description: "Keep your belongings safe and protected with around-the-clock monitoring.", icon: icons.camera },
-    { title: "Always open", description: "Access your unit whenever you need it.", icon: icons.lockOpen },
+    { title: "24/7 access", description: "Access your unit whenever you need it—day or night, no office hours required.", icon: icons.lockOpen },
     { title: "Clean & well maintained", description: "Professional, well-kept storage spaces.", icon: icons.checkCircle },
     { title: "Heated units", description: "Available upon request for temperature-sensitive items. Additional charges apply.", icon: icons.thermometer },
     { title: "Month to month rentals", description: "No contract needed. Stay as long or as short as you need.", icon: icons.calendar },
     { title: "Convenient Sydney Forks Location", description: "Located at 2627 Kings Rd with easy access from Sydney, North Sydney, and surrounding areas.", icon: icons.mapPin },
     { title: "Multiple Unit Sizes", description: "Storage units available for household, business, and seasonal storage needs.", icon: icons.squares2x2 },
+    { title: "9.5 foot ceilings", description: "More vertical space than typical storage facilities. Stack higher, store tall items, and maximize your unit.", icon: icons.arrowsUpDown },
     { title: "Locally Owned & Trusted", description: "Proudly serving the Sydney Forks community with reliable and secure storage solutions.", icon: icons.shieldCheck },
   ];
 

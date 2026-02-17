@@ -10,7 +10,7 @@ export default function Units() {
       <div className="container">
         <h2 className="section-title">Unit Options</h2>
         <p className="section-subtitle">
-          We offer a range of storage sizes to fit your needs.
+          We offer a range of storage sizes to fit your needs. All units feature <span className="units__ceiling-highlight">9.5 foot ceilings</span> for extra vertical space.
         </p>
         <div className="units__grid">
           {units.map((unit, index) => (

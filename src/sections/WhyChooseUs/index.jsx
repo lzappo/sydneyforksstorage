@@ -3,7 +3,7 @@ export default function WhyChooseUs() {
     "Local, family-owned business serving Sydney Forks and nearby communities",
     "Secure, clean, and well-maintained facility",
     "Flexible rental terms—month-to-month or longer",
-    "Always open—access your unit whenever you need it",
+    "24/7 access—no office hours, use your unit whenever you need it",
     "Competitive rates and no hidden fees",
     "Helpful staff ready to assist with your storage needs",
   ];

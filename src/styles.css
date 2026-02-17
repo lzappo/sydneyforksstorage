@@ -733,6 +733,11 @@ button {
   color: var(--color-text-muted);
 }
 
+.units__ceiling-highlight {
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
 .units__helper {
   margin: 0;
   font-size: 0.95rem;
