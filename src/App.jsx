@@ -13,8 +13,8 @@ import Footer from "./components/Footer";
 import MobileCTA from "./components/MobileCTA";
 import "./styles.css";
 
-// TODO: Replace with your production URL for canonical and Open Graph
-const SITE_URL = import.meta.env.VITE_SITE_URL || "https://sydneyforksstorage.ca";
+// Single source of truth for SEO URLs (canonical, og:url, twitter:url, JSON-LD)
+const SITE_URL = import.meta.env.VITE_SITE_URL || "https://sydneyforksstorage.ca/";
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
@@ -63,6 +63,7 @@ export default function App() {
         />
         <meta property="og:locale" content="en_CA" />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content={SITE_URL} />
         <meta name="twitter:title" content="Sydney Forks Self Storage | Storage Units in Sydney Forks, NS" />
         <meta
           name="twitter:description"
