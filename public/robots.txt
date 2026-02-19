@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sydneyforksselfstorage.ca/sitemap.xml
+Sitemap: https://sydneyforksstorage.ca/sitemap.xml

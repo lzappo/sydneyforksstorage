@@ -14,7 +14,7 @@ import MobileCTA from "./components/MobileCTA";
 import "./styles.css";
 
 // TODO: Replace with your production URL for canonical and Open Graph
-const SITE_URL = import.meta.env.VITE_SITE_URL || "https://sydneyforksselfstorage.ca";
+const SITE_URL = import.meta.env.VITE_SITE_URL || "https://sydneyforksstorage.ca";
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
