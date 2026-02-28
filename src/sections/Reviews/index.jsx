@@ -130,7 +130,7 @@ export default function Reviews() {
           <>
             <div className="reviews-summary">
               <div className="reviews-summary__logo">
-                <img src={logo} alt="" width={120} height={120} />
+                <img src={logo} alt="Sydney Forks Self Storage logo in customer reviews section" width={120} height={120} />
               </div>
               <div className="reviews-summary__middle">
                 <h3 className="reviews-summary__name">Sydney Forks Self Storage</h3>
