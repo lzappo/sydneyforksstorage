@@ -1118,7 +1118,7 @@ button {
 /* Location */
 .location {
   padding: 4rem 0;
-  background-color: var(--color-bg-darker);
+  background-color: var(--color-bg-dark);
 }
 
 .location__content {
