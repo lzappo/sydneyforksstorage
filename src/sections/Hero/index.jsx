@@ -1,13 +1,12 @@
-import heroImage from "../../assets/optimized/IMG_3841.jpeg";
-
 export default function Hero() {
   return (
     <section id="hero" className="hero">
       <div className="hero__bg">
         <img
-          src={heroImage}
+          src="/images/hero.jpeg"
           alt="Sydney Forks Self Storage facility building"
           loading="eager"
+          fetchPriority="high"
           className="hero__bg-img"
         />
         <div className="hero__overlay" aria-hidden="true" />
