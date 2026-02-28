@@ -73,7 +73,7 @@ function ReviewCard({ review }) {
       <header className="review-card__header">
         <div className="review-card__avatar" aria-hidden="true">
           {review.profile_photo_url ? (
-            <img src={review.profile_photo_url} alt="" width={40} height={40} />
+            <img src={review.profile_photo_url} alt="Reviewer profile photo" width={40} height={40} />
           ) : (
             <span className="review-card__initials">{getInitials(review.author_name)}</span>
           )}
