@@ -11,6 +11,7 @@ import Location from "./sections/Location";
 import Contact from "./sections/Contact";
 import Footer from "./components/Footer";
 import MobileCTA from "./components/MobileCTA";
+import { Analytics } from "@vercel/analytics/react";
 import "./styles.css";
 
 export default function App() {
@@ -46,6 +47,7 @@ export default function App() {
       </main>
       <Footer />
       <MobileCTA />
+      <Analytics />
     </>
   );
 }
