@@ -12,6 +12,7 @@ import Contact from "./sections/Contact";
 import Footer from "./components/Footer";
 import MobileCTA from "./components/MobileCTA";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import "./styles.css";
 
 export default function App() {
@@ -48,6 +49,7 @@ export default function App() {
       <Footer />
       <MobileCTA />
       <Analytics />
+      <SpeedInsights />
     </>
   );
 }
