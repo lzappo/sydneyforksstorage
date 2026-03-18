@@ -26,7 +26,7 @@ export default function Footer() {
             &copy; {currentYear} Sydney Forks Self Storage. All rights reserved.
           </p>
           <a
-            href="https://luizappitelli.vercel.app"
+            href="https://zappisoft.com"
             target="_blank"
             rel="noopener noreferrer"
             className="footer__built-by"
