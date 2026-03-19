@@ -436,6 +436,10 @@ button {
     margin-right: auto;
   }
 
+  .hero__trust {
+    justify-content: center;
+  }
+
   .hero__ctas {
     justify-content: center;
   }
@@ -457,6 +461,10 @@ button {
 }
 
 .hero__trust {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
   margin: 0 0 1.5rem;
   font-size: 0.95rem;
   font-weight: 600;

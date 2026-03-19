@@ -22,15 +22,7 @@ export default function Hero() {
         </p>
         <p className="hero__trust" aria-label="Key benefits">
           <span className="hero__trust-item">Easy access</span>
-          <span className="hero__trust-sep" aria-hidden="true">
-            {" "}
-            •{" "}
-          </span>
           <span className="hero__trust-item">Multiple unit sizes</span>
-          <span className="hero__trust-sep" aria-hidden="true">
-            {" "}
-            •{" "}
-          </span>
           <span className="hero__trust-item">Secure location</span>
         </p>
         <div className="hero__ctas">
