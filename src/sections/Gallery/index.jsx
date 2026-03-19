@@ -65,10 +65,10 @@ export default function Gallery() {
 
   return (
     <section className="gallery" aria-labelledby="gallery-heading">
-      <h2 id="gallery-heading" className="visually-hidden">
-        Facility photos
-      </h2>
       <div className="container">
+        <h2 id="gallery-heading" className="section-title gallery__heading">
+          Our Storage Units in Sydney NS
+        </h2>
         <div className="gallery__grid">
           {images.map((img, index) => (
             <Reveal key={index}>

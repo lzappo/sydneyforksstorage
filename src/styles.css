@@ -430,7 +430,8 @@ button {
   }
 
   .hero__title,
-  .hero__subtext {
+  .hero__subtext,
+  .hero__trust {
     margin-left: auto;
     margin-right: auto;
   }
@@ -449,10 +450,25 @@ button {
 }
 
 .hero__subtext {
-  margin: 0 0 1.5rem;
+  margin: 0 0 1rem;
   font-size: 1.1rem;
   color: var(--color-text-muted);
   max-width: 520px;
+}
+
+.hero__trust {
+  margin: 0 0 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text);
+  max-width: 560px;
+  line-height: 1.5;
+}
+
+.hero__trust-item::before {
+  content: "✔ ";
+  color: var(--color-accent);
+  font-weight: 700;
 }
 
 .hero__ctas {
@@ -465,6 +481,10 @@ button {
 .gallery {
   padding: 2rem 0;
   background-color: var(--color-bg-darker);
+}
+
+.gallery__heading {
+  margin-bottom: 1.25rem;
 }
 
 .gallery__grid {
@@ -1113,6 +1133,24 @@ button {
   margin: 0 0 1.25rem;
   color: var(--color-text-muted);
   line-height: 1.7;
+}
+
+/* Local SEO intro (between FAQ and location) */
+.seo-local {
+  padding: 3.5rem 0;
+  background-color: var(--color-bg-dark);
+}
+
+.seo-local .section-title {
+  margin-bottom: 1rem;
+}
+
+.seo-local__text {
+  margin: 0;
+  max-width: 720px;
+  color: var(--color-text-muted);
+  line-height: 1.75;
+  font-size: 1rem;
 }
 
 /* Location */

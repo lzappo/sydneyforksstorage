@@ -15,7 +15,7 @@ export default function Footer() {
           </a>
         </div>
         <nav className="footer__nav" aria-label="Footer navigation">
-          <a href="#units">Units</a>
+          <a href="#units">Storage Units</a>
           <a href="#features">Why Choose Us</a>
           <a href="#reviews">Reviews</a>
           <a href="#location">Location</a>

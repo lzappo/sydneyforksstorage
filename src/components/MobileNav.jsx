@@ -2,7 +2,7 @@ import { useToggle } from "../hooks/useToggle";
 import { useBodyScrollLock } from "../hooks/useBodyScrollLock";
 
 export const navLinks = [
-  { href: "#units", label: "Units" },
+  { href: "#units", label: "Storage Units" },
   { href: "#features", label: "Why Choose Us" },
   { href: "#reviews", label: "Reviews" },
   { href: "#location", label: "Location" },

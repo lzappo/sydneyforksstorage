@@ -7,6 +7,7 @@ import Units from "./sections/Units";
 import WhyChooseUs from "./sections/WhyChooseUs";
 import Reviews from "./sections/Reviews";
 import FAQ from "./sections/FAQ";
+import SeoLocal from "./sections/SeoLocal";
 import Location from "./sections/Location";
 import Contact from "./sections/Contact";
 import Footer from "./components/Footer";
@@ -38,6 +39,9 @@ export default function App() {
         </Reveal>
         <Reveal>
           <FAQ />
+        </Reveal>
+        <Reveal>
+          <SeoLocal />
         </Reveal>
         <Reveal>
           <Location />

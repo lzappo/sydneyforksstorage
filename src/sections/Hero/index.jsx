@@ -13,14 +13,29 @@ export default function Hero() {
       </div>
       <div className="hero__content container">
         <h1 className="hero__title">
-          Secure & Affordable Self Storage in Sydney Forks
+          Secure &amp; Affordable Storage Units in Sydney NS
         </h1>
         <p className="hero__subtext">
-          Security, convenience, and flexible rentals for your belongings. Store with confidence in Sydney Forks, Nova Scotia.
+          Security, convenience, and flexible rentals for your belongings. Convenient
+          for Sydney NS and Sydney Forks, with easy access from surrounding Cape
+          Breton communities.
+        </p>
+        <p className="hero__trust" aria-label="Key benefits">
+          <span className="hero__trust-item">Easy access</span>
+          <span className="hero__trust-sep" aria-hidden="true">
+            {" "}
+            •{" "}
+          </span>
+          <span className="hero__trust-item">Multiple unit sizes</span>
+          <span className="hero__trust-sep" aria-hidden="true">
+            {" "}
+            •{" "}
+          </span>
+          <span className="hero__trust-item">Secure location</span>
         </p>
         <div className="hero__ctas">
           <a href="tel:9025742282" className="button button--primary button--large">
-            Call Now
+            Call for Availability
           </a>
           <a href="#contact" className="button button--secondary button--large">
             Get a Quote
