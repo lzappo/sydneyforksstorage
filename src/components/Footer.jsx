@@ -28,7 +28,7 @@ export default function Footer() {
           <a
             href="https://zappisoft.com"
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener"
             className="footer__built-by"
           >
             Built by Zappisoft
