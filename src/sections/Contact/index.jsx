@@ -1,5 +1,6 @@
 import { useState } from "react";
 import logo from "../../assets/optimized/logo.jpeg";
+import Promotion from "../../components/Promotion";
 
 const endpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT || "";
 
@@ -61,6 +62,7 @@ export default function Contact() {
         <p className="section-subtitle">
           Fill out the form below or call us directly for a quick quote.
         </p>
+        <Promotion variant="inline" />
         <div className="contact__content">
           <div className="contact__phone-block">
             <p className="contact__phone-label">Prefer to call?</p>

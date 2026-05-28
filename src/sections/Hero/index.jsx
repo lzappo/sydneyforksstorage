@@ -1,3 +1,5 @@
+import Promotion from "../../components/Promotion";
+
 export default function Hero() {
   return (
     <section id="hero" className="hero">
@@ -15,6 +17,7 @@ export default function Hero() {
         <h1 className="hero__title">
           Secure &amp; Affordable Storage Units in Sydney NS
         </h1>
+        <Promotion variant="badge" />
         <p className="hero__subtext">
           Security, convenience, and flexible rentals for your belongings. Convenient
           for Sydney NS and Sydney Forks, with easy access from surrounding Cape

@@ -1,3 +1,5 @@
+import Promotion from "../../components/Promotion";
+
 export default function Units() {
   const units = [
     { size: "9 ft × 10 ft", price: "$150/month + HST", description: "Perfect for boxes, seasonal items, or small furniture. Ideal for apartments and decluttering." },
@@ -12,6 +14,7 @@ export default function Units() {
         <p className="section-subtitle">
           We offer a range of storage sizes to fit your needs. All units feature <span className="units__ceiling-highlight">9.5 foot ceilings</span> for extra vertical space.
         </p>
+        <Promotion variant="inline" />
         <div className="units__grid">
           {units.map((unit, index) => (
             <article key={index} className="unit-card">

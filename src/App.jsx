@@ -1,4 +1,5 @@
 import Header from "./components/Header";
+import Promotion from "./components/Promotion";
 import Hero from "./sections/Hero";
 import Gallery from "./sections/Gallery";
 import Reveal from "./components/Reveal";
@@ -19,6 +20,7 @@ import "./styles.css";
 export default function App() {
   return (
     <>
+      <Promotion variant="banner" />
       <Header />
       <main>
         <Hero />
