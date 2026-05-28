@@ -1583,12 +1583,13 @@ button {
   border-top: 2px solid var(--color-accent);
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
   gap: 0.75rem;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 768px) {
   .mobile-cta {
     display: none;
-    justify-content: center;
     transition: transform 0.2s ease-out, opacity 0.2s ease-out;
   }
 
@@ -1598,7 +1599,7 @@ button {
 }
 
 .mobile-cta__btn {
-  flex: 1;
+  flex: 0 1 calc(50% - 0.375rem);
   max-width: 160px;
   padding: 0.75rem 1rem;
   font-weight: 600;
