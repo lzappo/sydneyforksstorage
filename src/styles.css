@@ -891,10 +891,16 @@ button {
   padding: 4rem 0;
 }
 
-.reviews__loading {
+.reviews__loading,
+.reviews__empty {
   margin: 0 0 1.5rem;
   color: var(--color-text-muted);
   font-size: 0.95rem;
+}
+
+.reviews__empty a {
+  color: var(--color-accent-hover);
+  text-decoration: underline;
 }
 
 /* Google Reviews Summary header card */

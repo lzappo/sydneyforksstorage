@@ -26,10 +26,10 @@ npm run preview
 
 ### Google Maps & Place ID
 Copy `.env.example` to `.env` and add:
-- `VITE_GOOGLE_MAPS_API_KEY` – From [Google Cloud Console](https://console.cloud.google.com/). Enable **Places API** (for live Google reviews). The map uses a basic embed that doesn't require an API key.
+- `VITE_GOOGLE_MAPS_API_KEY` – From [Google Cloud Console](https://console.cloud.google.com/). Enable **Places API (New)** for live Google reviews (with author names). Legacy Places API is used as a fallback.
 - `VITE_GOOGLE_PLACE_ID` – Your business Place ID (used for the map embed, reviews, and "Read more on Google" link).
 
-**Google reviews** are fetched via `/api/reviews` (server-side to avoid CORS). Locally, the Vite dev server proxies this to the Places API. For production, deploy to **Vercel** so the `api/reviews.js` serverless function runs. Add `GOOGLE_MAPS_API_KEY` and `GOOGLE_PLACE_ID` to your Vercel project env vars (or reuse the `VITE_` ones).
+**Google reviews** are fetched via `/api/reviews` (server-side to avoid CORS). Locally, the Vite dev server proxies this to the Places API. For production, deploy to **Vercel** so the `api/reviews.js` serverless function runs. Add `GOOGLE_MAPS_API_KEY` and `GOOGLE_PLACE_ID` to your Vercel project env vars (or reuse the `VITE_` ones). Ensure billing is enabled on your Google Cloud project.
 
 ### Site URL
 - Add `VITE_SITE_URL=https://yourdomain.com` to `.env` for canonical and Open Graph URLs.

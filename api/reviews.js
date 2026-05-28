@@ -2,6 +2,8 @@
  * Vercel serverless function: fetches Google Place reviews via REST API.
  * Requires GOOGLE_MAPS_API_KEY and GOOGLE_PLACE_ID in Vercel env vars.
  */
+import { fetchGooglePlaceReviews } from "../lib/googleReviews.js";
+
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   if (req.method === "OPTIONS") {
@@ -14,26 +16,12 @@ export default async function handler(req, res) {
   const apiKey = process.env.GOOGLE_MAPS_API_KEY || process.env.VITE_GOOGLE_MAPS_API_KEY;
   const placeId = process.env.GOOGLE_PLACE_ID || process.env.VITE_GOOGLE_PLACE_ID;
 
-  if (!apiKey || !placeId) {
-    return res.status(500).json({ error: "Missing API key or Place ID" });
-  }
-
   try {
-    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${encodeURIComponent(placeId)}&fields=reviews&key=${apiKey}`;
-    const response = await fetch(url);
-    const data = await response.json();
+    const { reviews, error, status } = await fetchGooglePlaceReviews(apiKey, placeId);
 
-    if (data.status !== "OK") {
-      return res.status(400).json({ error: data.status, message: data.error_message || "Place not found" });
+    if (!reviews?.length) {
+      return res.status(status || 400).json({ error: error || "No reviews found" });
     }
-
-    const reviews = (data.result?.reviews || []).map((r) => ({
-      text: r.text || "",
-      author_name: r.author_name || "Google user",
-      rating: r.rating ?? null,
-      profile_photo_url: r.profile_photo_url || null,
-      relative_time_description: r.relative_time_description || null,
-    }));
 
     return res.status(200).json({ reviews });
   } catch (err) {

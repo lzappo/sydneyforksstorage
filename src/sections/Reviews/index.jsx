@@ -14,6 +14,8 @@ const FALLBACK_REVIEWS = [
   { text: "Quick to get set up and the unit was ready when I needed it. Would recommend to anyone in the area.", author_name: "Customer", rating: 5, profile_photo_url: null, relative_time_description: null },
 ];
 
+const hasPlaceId = !!placeId;
+
 async function fetchGoogleReviews() {
   try {
     const res = await fetch("/api/reviews");
@@ -97,12 +99,12 @@ function ReviewCard({ review }) {
 }
 
 export default function Reviews() {
-  const { data: fetchedReviews, loading } = useFetch(fetchGoogleReviews, !!placeId);
+  const { data: fetchedReviews, loading } = useFetch(fetchGoogleReviews, hasPlaceId);
   const reviews = fetchedReviews ?? FALLBACK_REVIEWS;
   const [carouselIndex, setCarouselIndex] = useState(0);
   const scrollRef = useRef(null);
 
-  const avgRating = computeAverageRating(reviews);
+  const avgRating = reviews.length > 0 ? computeAverageRating(reviews) : 5.0;
   const totalCards = reviews.length;
   const cardsToShow = 3;
   const maxIndex = Math.max(0, totalCards - cardsToShow);
