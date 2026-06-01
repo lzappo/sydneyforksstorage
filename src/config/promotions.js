@@ -5,8 +5,8 @@ export const promotions = [
     startDate: "2026-05-01",
     endDate: "2026-08-31",
     headline: "Summer Special — 50% Off",
-    message: "Get 50% off your first 2 months when you rent a unit.",
-    terms: "New rentals only. Limited time.",
+    message: "Get 50% off your first 2 months when you rent a unit (applies to medium and large units only).",
+    terms: "New rentals only. Limited time. Applies to medium and large units only.",
     cta: { label: "Get a Quote", href: "#contact" },
   },
 ];
