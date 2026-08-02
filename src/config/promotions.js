@@ -1,7 +1,7 @@
 export const promotions = [
   {
     id: "summer-50-off",
-    enabled: true,
+    enabled: false,
     startDate: "2026-05-01",
     endDate: "2026-08-31",
     headline: "Summer Special — 50% Off",
