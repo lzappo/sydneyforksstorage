@@ -40,21 +40,50 @@ Notes:
 - FAQ answers can surface directly in Google results, detached from the page,
   so keep them self-contained (say "on our website", not "on this page").
 
-### Known duplication (not yet centralized)
+### Contact details are intentionally NOT centralized
 
-Still copy-pasted in several files — worth the same treatment if it ever changes:
+The phone number and address are repeated across the site. This was considered
+for the same `src/config/` treatment as pricing and decided against — it is a
+deliberate choice, not an unfinished chore:
 
-- **Phone number** (`902-574-2282` / `+1-902-574-2282` / `tel:9025742282`) — in
-  9 places: `index.html`, `src/config/faqs.js`, the `Hero`, `Units`, `Contact`
-  and `Location` sections, and the `Header`, `Footer` and `MobileCTA`
-  components, in both display and `tel:` forms.
-- **Address / NAP details** (`2627 King's Rd`, postal code, geo coordinates) —
-  in `index.html`, `src/config/faqs.js`, and the `Location` section.
-- **Ceiling height** — "9.5 foot ceilings" in the `Features` section and the
-  `Units` subtitle, but "9.5-foot ceilings" in the FAQ answer; the hyphenation
-  has already drifted.
+- **The value has never changed.** Across the repo's history, `902-574-2282` is
+  the only phone number it has ever contained; same for `2627 King's Rd` and the
+  postal code. Every commit that touches those strings is structural (adding a
+  section, moving meta tags), never a change of value. Pricing and promo copy, by
+  contrast, churn regularly — which is why those *are* centralized.
+- **Nothing has drifted.** All occurrences currently agree.
+- **A single constant wouldn't collapse them anyway.** Three forms are each
+  required by their context, so a shared module would still need three
+  accessors, and each call site would still have to pick the right one:
 
-A `src/config/business.js` alongside the files above would be the natural home.
+  | Form | Used for |
+  | --- | --- |
+  | `902-574-2282` | human-readable display |
+  | `tel:9025742282` | `href` — digits only |
+  | `+1-902-574-2282` | `telephone` in the SelfStorage schema |
+
+#### If the number or address ever does change
+
+It's a 16-occurrence edit across 9 files (the greps below report 15 lines —
+`Footer.jsx` carries both forms on one line). The `tel:` links are the easy ones
+to miss — a stale one silently breaks click-to-call instead of looking wrong.
+Start by listing every occurrence:
+
+```bash
+grep -rn "902-574-2282\|9025742282" --include="*.jsx" --include="*.js" --include="*.html" src index.html
+grep -rn "King's Rd\|B1L1A1\|46.0683" --include="*.jsx" --include="*.js" --include="*.html" src index.html
+```
+
+Files to expect: `index.html`, `src/config/faqs.js`, the `Hero`, `Units`,
+`Contact` and `Location` sections, and the `Header`, `Footer` and `MobileCTA`
+components. If it turns out to change more than once, revisit the decision above
+and add a `src/config/business.js`.
+
+### Minor known inconsistency
+
+"9.5 foot ceilings" in the `Features` section and the `Units` subtitle vs
+"9.5-foot ceilings" in the sizes FAQ answer. Cosmetic hyphenation drift, not
+worth centralizing — just pick one if you're editing that copy anyway.
 
 ## Where to add real content
 
