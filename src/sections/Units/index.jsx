@@ -1,12 +1,7 @@
 import Promotion from "../../components/Promotion";
+import { units, monthlyWithTax } from "../../config/pricing";
 
 export default function Units() {
-  const units = [
-    { size: "9 ft × 10 ft", price: "$150/month + HST", description: "Perfect for boxes, seasonal items, or small furniture. Ideal for apartments and decluttering." },
-    { size: "10 ft × 18 ft", price: "$250/month + HST", description: "Room for furniture sets, appliances, or business inventory. Great for moving or renovations." },
-    { size: "14 ft × 16 ft", price: "$325/month + HST", description: "Spacious units for vehicles, large furniture, or commercial storage. Maximum flexibility." },
-  ];
-
   return (
     <section id="units" className="units">
       <div className="container">
@@ -16,10 +11,10 @@ export default function Units() {
         </p>
         <Promotion variant="inline" />
         <div className="units__grid">
-          {units.map((unit, index) => (
-            <article key={index} className="unit-card">
+          {units.map((unit) => (
+            <article key={unit.id} className="unit-card">
               <h3 className="unit-card__title">{unit.size}</h3>
-              <p className="unit-card__price">{unit.price}</p>
+              <p className="unit-card__price">{monthlyWithTax(unit.id)}</p>
               <p className="unit-card__desc">{unit.description}</p>
             </article>
           ))}
